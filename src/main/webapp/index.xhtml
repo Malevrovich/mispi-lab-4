@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      lang="en-US">
+
+<h:head>
+    <title>Start Page</title>
+    <h:outputStylesheet name="css/layouts/default_layout.css"/>
+    <h:outputStylesheet name="css/typography.css"/>
+    <h:outputStylesheet name="css/content/button.css"/>
+</h:head>
+
+<h:body>
+    <h:panelGroup styleClass="main">
+        <h:panelGroup styleClass="content-wrap"
+                      style="display:flex;
+                             flex-direction:column;
+                             justify-content: center;
+                             align-items: center;">
+            <h1 class="block-title">Скрябин Иван P32092 Вариант 521662</h1>
+            <h:outputText styleClass="p" style="font-size: 1.5rem; margin: 10px 0"
+                                                id="clock" value="#{Time.currentTime}"/>
+            <h:form id="main-page-form">
+                <h:commandButton id="main-page-button" styleClass="redirect-button"
+                                 value="Main Page!" action="main.xhtml?faces-redirect=true"/>
+            </h:form>
+            <h:form id="clock-update-form" style="display:none">
+                <h:commandButton id="update-button">
+                    <f:ajax render="clock"/>
+                </h:commandButton>
+            </h:form>
+        </h:panelGroup>
+    </h:panelGroup>
+    <h:outputScript>
+        setInterval(() => {
+            document.getElementById("clock-update-form:update-button").click()
+        }, 13000)
+    </h:outputScript>
+</h:body>
+
+
+</html>

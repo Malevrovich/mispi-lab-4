@@ -1,0 +1,110 @@
+.radio-input-block {
+    background-color: #171717;
+}
+
+.buttons-holder {
+    height: 70%;
+    width: 100%;
+
+    min-height: 18vw;
+
+    display: grid;
+    grid-template-columns: repeat(10, 2vw);
+    grid-template-rows: repeat(9, 2vw);
+
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons-holder .radio-button:nth-of-type(1) {
+    grid-row: 2/3;
+    grid-column: 3/4;
+}
+
+.buttons-holder .radio-button:nth-of-type(2) {
+    grid-row: 2/3;
+    grid-column: 7/8;
+}
+
+.buttons-holder .radio-button:nth-of-type(3) {
+    grid-row: 5/6;
+    grid-column: 3/4;
+}
+
+.buttons-holder .radio-button:nth-of-type(4) {
+    grid-row: 5/6;
+    grid-column: 7/8;
+}
+
+.buttons-holder .radio-button:nth-of-type(5) {
+    grid-row: 8/9;
+    grid-column: 5/6;
+}
+
+body .radio-button {
+    height: 4vw;
+    width: 4vw;
+    position: relative;
+}
+
+body .radio-button .ui-radiobutton {
+    height: 100%;
+    width: 100%;
+}
+
+body .radio-button input,
+body .radio-button .ui-radiobutton .ui-radiobutton-box{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    appearance: none;
+
+    border: none;
+
+    background-color: #272727;
+}
+
+body .radio-button label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+}
+
+body .radio-button input:checked,
+body .radio-button .ui-radiobutton .ui-radiobutton-box.ui-state-active,
+body .radio-button .ui-radiobutton .ui-radiobutton-box.ui-state-active.ui-state-hover,
+body .radio-button .ui-radiobutton .ui-radiobutton-box.ui-state-active.ui-state-focus{
+    background-color: #A4A4A4;
+    border: none;
+    box-shadow: none;
+}
+
+body .radio-button .ui-radiobutton .ui-radiobutton-box span {
+    display: none;
+}
+
+@media screen and (max-width: 700px) {
+    .buttons-holder {
+        min-height: 50vw;
+
+        display: grid;
+        grid-template-columns: repeat(10, 5vw);
+        grid-template-rows: repeat(10, 5vw);
+    }
+
+    .radio-input-block {
+        min-height: 65vw;
+        width: 65vw;
+    }
+
+    body .radio-button {
+        height: 10vw;
+        width: 10vw;
+    }
+
+    .radio-input-block .block-title {
+        margin: 10px;
+    }
+}

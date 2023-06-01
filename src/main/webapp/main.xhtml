@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      lang="en-US">
+
+<h:head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Скрябин Иван P32092</title>
+
+    <h:outputStylesheet name="css/layouts/default_layout.css"/>
+    <h:outputStylesheet name='css/layouts/default_layout.css'/>
+    <h:outputStylesheet name='css/layouts/main_layout.css'/>
+    <h:outputStylesheet name='css/typography.css'/>
+    <h:outputStylesheet name='css/header.css'/>
+    <h:outputStylesheet name='css/content/content.css'/>
+    <h:outputStylesheet name='css/content/check-button.css'/>
+    <h:outputStylesheet name='css/content/table.css'/>
+    <h:outputStylesheet name='css/content/button.css'/>
+
+</h:head>
+
+<h:body styleClass="body">
+    <h:outputStylesheet name='css/content/radio-input.css'/>
+    <h:outputStylesheet name='css/content/spinner.css'/>
+
+    <h:panelGroup styleClass="main">
+        <h:panelGroup styleClass="content-wrap">
+            <h:panelGroup id="table-block" styleClass="table-block">
+                <h:dataTable value="#{ShotDAO.shots}" var="shot">
+                    <h:column>
+                        <f:facet name="header">X</f:facet>
+                        <h:outputText value="#{shot.x}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Y</f:facet>
+                        <h:outputText value="#{shot.y}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">R</f:facet>
+                        <h:outputText value="#{shot.r}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Hit</f:facet>
+                        <h:outputText value="#{shot.shot}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:panelGroup>
+
+            <h:form id="main-form" styleClass="form-wrap">
+                <h:panelGroup styleClass="info-block">
+                    <h1 class="block-title">Скрябин Иван<br/>P32092<br/>Вариант 521662</h1>
+                    <h:panelGroup styleClass="plot-box">
+                        <canvas id="plot" width="500" height="500"></canvas>
+                    </h:panelGroup>
+                    <h:commandButton id="back-button" styleClass="redirect-button"
+                                     value="Back" action="index.xhtml?faces-redirect=true"/>
+                </h:panelGroup>
+            
+                <h:panelGroup styleClass="input-block radio-input-block r-input-block">
+                    <h1 class="block-title">R</h1>
+
+                    <p:selectOneRadio id="r-input" onchange="RChangedListener(this.value);"
+                                      value="#{ShotBean.r}">
+                        <f:selectItem itemValue="1" itemLabel="1"/>
+                        <f:selectItem itemValue="2" itemLabel="2"/>
+                        <f:selectItem itemValue="3" itemLabel="3"/>
+                        <f:selectItem itemValue="4" itemLabel="4"/>
+                        <f:selectItem itemValue="5" itemLabel="5"/>
+                        
+                        <f:facet name="custom">
+                            <div class="buttons-holder">
+                                <h:panelGroup styleClass="radio-button">
+                                    <p:radioButton id="radio-1" for="r-input" itemIndex="0"/>
+                                    <p:outputLabel for="radio-1">1</p:outputLabel>
+                                </h:panelGroup>
+
+                                <h:panelGroup styleClass="radio-button">
+                                    <p:radioButton id="radio-2" for="r-input" itemIndex="1"/>
+                                    <p:outputLabel for="radio-2">2</p:outputLabel>
+                                </h:panelGroup>
+
+                                <h:panelGroup styleClass="radio-button">
+                                    <p:radioButton id="radio-3" for="r-input" itemIndex="2"/>
+                                    <p:outputLabel for="radio-3">3</p:outputLabel>
+                                </h:panelGroup>
+
+                                <h:panelGroup styleClass="radio-button">
+                                    <p:radioButton id="radio-4" for="r-input" itemIndex="3"/>
+                                    <p:outputLabel for="radio-4">4</p:outputLabel>
+                                </h:panelGroup>
+
+                                <h:panelGroup styleClass="radio-button">
+                                    <p:radioButton id="radio-5" for="r-input" itemIndex="4"/>
+                                    <p:outputLabel for="radio-5">5</p:outputLabel>
+                                </h:panelGroup>
+                            </div>
+                        </f:facet>
+                    </p:selectOneRadio>
+                </h:panelGroup>
+
+                <h:panelGroup id="y-input-block" styleClass="input-block y-input-block">
+                    <h1 class="block-title">Y</h1>
+                    <h:inputText id="y-input" maxlength="6" value="#{ShotBean.y}"
+                                    validatorMessage="Y must be float number in range [-5; 3]">
+                        <f:validateDoubleRange minimum="-5" maximum="3"/>
+                    </h:inputText>
+                    <h:message for="y-input" style="color: red"/>
+                </h:panelGroup>
+
+                <h:panelGroup styleClass="check-button-holder">
+                    <h:panelGroup styleClass="check-button">
+                        <h:commandButton title="CHECK" id="check-button-box" styleClass="check-button-box block-title">
+                            <f:ajax execute="@form" render="table-block y-input-block"
+                                        listener="#{ShotBean.shot()}"
+                                    onevent="(data) => {if(data.status == 'success') {updateDots(choosenR)}}"/>
+                        </h:commandButton>
+                        <h:outputLabel for="check-button-box" styleClass="check-button-label block-title">SHOT!</h:outputLabel>
+                    </h:panelGroup>
+                </h:panelGroup>
+
+                <h:panelGroup styleClass="input-block x-input-block">
+                    <h1 class="block-title">X</h1>
+                    <p:spinner styleClass="x-spinner" value="#{ShotBean.x}"
+                               stepFactor="0.1" min="-5.0" max="5.0" id="x-input"
+                               widgetVar="spinnerWV">
+                    </p:spinner>
+                </h:panelGroup>
+            </h:form>
+        </h:panelGroup>
+    </h:panelGroup>
+
+
+    <h:outputScript name="scripts/validate.js"/>
+    <h:outputScript name="scripts/plot.js"/>
+    <h:outputScript name="scripts/shot.js"/>
+    <h:outputScript name="scripts/plotInit.js"/>
+    <h:outputScript name="scripts/fix.js"/>
+    <h:outputScript name="scripts/selectOneRadioHandler.js"/>
+</h:body>
+
+</html>

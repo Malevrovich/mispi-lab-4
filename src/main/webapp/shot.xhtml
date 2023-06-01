@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      lang="en-US">
+
+<h:body>
+    <f:event type="preRenderView" listener="#{ShotBean.shotByRequest(param['x'], param['y'], param['r'])}" />
+    <h:dataTable value="#{ShotDAO.shots}" var="shot">
+        <h:column>
+            <f:facet name="header">X</f:facet>
+            <h:outputText value="#{shot.x}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Y</f:facet>
+            <h:outputText value="#{shot.y}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">R</f:facet>
+            <h:outputText value="#{shot.r}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Hit</f:facet>
+            <h:outputText value="#{shot.shot}"/>
+        </h:column>
+    </h:dataTable>
+
+    <h:outputText value="#{ShotValidator.message}"/>
+</h:body>
+
+</html>

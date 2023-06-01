@@ -1,0 +1,17 @@
+.redirect-button {
+    box-sizing: border-box;
+
+    width: 10vw;
+    height: 3vw;
+
+    min-height: 50px;
+    min-width: 150px;
+
+    background-color: #272727;
+    border: 5px solid #171717;
+}
+
+.redirect-button:hover {
+    cursor: pointer;
+    background-color: #101010;
+}
